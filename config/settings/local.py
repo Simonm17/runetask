@@ -23,7 +23,6 @@ DATABASES = {
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.abspath(os.path.join(BASE_DIR, 'static')),
-    # BASE_DIR / "static",  # same thing as above
+    BASE_DIR / "static",
 ]
 
