@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     
     'corsheaders',
+
+    'tasks',
 ]
 
 SITE_ID=1
