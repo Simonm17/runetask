@@ -8,6 +8,9 @@ from .models import Task
 from .serializers import TaskSerializer
 
 
+"""
+    TaskListCreateAPIView & TaskRetrieveUpdateDestroyAPIView is replaced by TaskViewSet.
+"""
 class TaskListCreateAPIView(ListCreateAPIView):
     queryset = Task.objects.all()
     permission_classes = [IsAuthenticated]
