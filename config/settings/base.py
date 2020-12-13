@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'users',
 ]
 
-SITE_ID=1
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -112,6 +112,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 # DRF settings
 REST_FRAMEWORK = {
