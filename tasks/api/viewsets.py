@@ -13,6 +13,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     # permission to allow non-owner to read because tasks will be public
     permission_classes = [IsOwnerOrReadOnly]
+    lookup_field = 'uuid'
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)

@@ -18,10 +18,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['url', 'id', 'username', 'tasks']
+        fields = ['url', 'username', 'tasks']
+
         # need to overwrite default view_name='user-detail' because app_name
+        # NOTE: if you use serializer.HyperlinkedIdentityField outside of meta,
+        # it will assign to wrong user and instead index the user correlating to task id.
         extra_kwargs = {
-            'url': {'view_name': 'users:user-detail'},
-            'tasks': {'view_name': 'tasks:task-detail'}
+            'url': {'view_name': 'users:user-detail', 'lookup_field': 'username'},
+            'tasks': {'view_name': 'tasks:task-detail', 'lookup_field': 'uuid'}
         }
 
