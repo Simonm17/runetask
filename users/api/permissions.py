@@ -8,6 +8,7 @@ class IsAdminOrOwner(permissions.BasePermission):
             Handles permission for User's List API view.
             Only superuser may post/put/delete.
             If not superuser, read only.
+            This ensures people create accounts via allauth register.
         """
         if request.method in permissions.SAFE_METHODS:
             return True
