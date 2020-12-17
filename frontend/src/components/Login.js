@@ -24,11 +24,6 @@ function Login({ setToken, setUser, setMessage }){
             let authUser = localStorage.setItem('user', username);
             setUser(authUser);
 
-            console.log(`
-                ${authToken},
-                ${username}
-            `);
-
             setMessage(`Logged in as ${username}.`);
         })
         .catch(err => {

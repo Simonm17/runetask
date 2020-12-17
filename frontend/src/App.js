@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Login from './components/Login';
 import Logout from './components/Logout';
+import UserPage from './pages/User';
 
 
 function App() {
@@ -32,6 +33,10 @@ function App() {
       {token ? 
         <Logout setToken={setToken} setUser={setUser} setMessage={setMessage}/> :
         <Login setToken={setToken} setUser={setUser} setMessage={setMessage}/>
+      }
+      {user ?
+        <UserPage username={user} /> :
+        <h5>Sign in to get user.</h5>
       }
     </div>
   );
