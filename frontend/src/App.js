@@ -22,7 +22,6 @@ function App() {
   useEffect(() => {
     checkToken();
     checkUser();
-    console.log(`Component refreshed after token add/delete.`)
   }, [token, user]);
 
   return (

@@ -15,10 +15,7 @@ const UserPage = ({ username }) => {
         const getUserAPI = () => {
             axios.get(`http://localhost:8000/users/` + username)
             .then(res => {
-                console.log(res);
                 setTaskUrls(res.data.tasks);
-                console.log(`printing tasks: ${tasks}.`);
-                console.log(typeof tasks + '<- type');
             })
             .catch(err => {
                 console.log(err);
@@ -31,10 +28,11 @@ const UserPage = ({ username }) => {
         for (let i = 0; i < taskUrls.length; i++){
             axios.get(taskUrls[i])
             .then( res => {
-                console.log(res.data.description);
-                console.log(`printed task ${i}.`);
                 setTasks(prevTasks => [...prevTasks, res.data.description]);
             })
+            .catch(err => {
+                console.log(err);
+            });
         }
     }, [taskUrls]);
 
