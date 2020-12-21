@@ -5,8 +5,11 @@ import axios from 'axios';
 const UserPage = ({ username }) => {
 
     const [tasks, setTasks] = useState([]);
+    const [desc, setDesc] = useState([]);
 
-    const taskDetail = tasks.map( task => <li key={tasks.indexOf(task)}>{task}</li> );
+    const taskDescription = desc.map( task => 
+        <li key={desc.indexOf(task)}>{task}</li> 
+    );
 
 
     useEffect(() => {
@@ -25,11 +28,24 @@ const UserPage = ({ username }) => {
         getUserAPI();
     }, []);
 
+    useEffect(() => {
+        console.log(`hi, tasks triggered this.`);
+        for (let i = 0; i < tasks.length; i++){
+            axios.get(tasks[i])
+            .then( res => {
+                console.log(res.data.description);
+                console.log(`printed task ${i}.`);
+                setDesc(prevDesc => [...prevDesc, res.data.description]);
+            })
+        }
+    }, [tasks]);
+
+
     return (
         <div>
             <h1>{username}</h1>
-            {tasks.length > 0 ?
-                taskDetail :
+            {desc.length > 0 ?
+                taskDescription :
                 <p>You have no tasks! Click to add.</p>
             }
         </div>
