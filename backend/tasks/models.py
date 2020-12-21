@@ -11,6 +11,7 @@ class Task(models.Model):
         default=uuid_lib.uuid4,
         editable=False
     )
+    completed = models.BooleanField(default=False)
     # use related_name to link relationships for hyperlinkrelationship serializer later on
     # https://stackoverflow.com/questions/42436976/django-rest-framework-attributeerror-user-object-has-no-attribute-books
     created_by = models.ForeignKey(User, related_name='tasks', on_delete=models.CASCADE)
