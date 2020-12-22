@@ -17,13 +17,21 @@ const UserPage = ({ username }) => {
     // confirm button triggers Task.delete() via post request.
     // cancel button resets buttons and returns x button.
 
-    const taskDescriptions = tasks.map( task => 
-        <li key={tasks.indexOf(task)}>
-            {task} 
-            <button>✓</button><button>&times;</button>
-            <button>confirm</button><button>cancel</button>
-        
-        </li> 
+    const taskDescriptions = tasks.map( task => {
+            if (username) {
+                return <li key={tasks.indexOf(task)}>
+                    {task} 
+                    <button>✓</button><button>&times;</button>
+                    <button>confirm</button><button>cancel</button>
+                </li> 
+            }
+            else {
+                return <li key={tasks.indexOf(task)}>
+                    {task}
+                </li>
+            }
+        }
+
     );
 
     useEffect(() => {
