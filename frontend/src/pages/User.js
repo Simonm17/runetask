@@ -7,8 +7,23 @@ const UserPage = ({ username }) => {
     const [taskUrls, setTaskUrls] = useState([]);
     const [tasks, setTasks] = useState([]);
 
+    const deletebutton = () => {
+
+    }
+
+    // note: MAKE SURE USER IS AUTHENTICATED AND EQUALS OBJECT OWNER TO DISPLAY BUTTONS
+    // ✓ button is a toggle; saves Task.completed field as true or false, indicated by regular or crossed-out text.
+    // x button is a toggle; it brings out the confirm & cancel buttons. Once clicked, x button disappears.
+    // confirm button triggers Task.delete() via post request.
+    // cancel button resets buttons and returns x button.
+
     const taskDescriptions = tasks.map( task => 
-        <li key={tasks.indexOf(task)}>{task}</li> 
+        <li key={tasks.indexOf(task)}>
+            {task} 
+            <button>✓</button><button>&times;</button>
+            <button>confirm</button><button>cancel</button>
+        
+        </li> 
     );
 
     useEffect(() => {
@@ -40,7 +55,8 @@ const UserPage = ({ username }) => {
         <div>
             <h1>{username}</h1>
             {tasks.length > 0 ?
-                taskDescriptions :
+                <ul> {taskDescriptions} </ul>
+                :
                 <p>You have no tasks! Click to add.</p>
             }
         </div>
