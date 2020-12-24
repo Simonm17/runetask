@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from ..models import Task
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(serializers.HyperlinkedModelSerializer):
     # NOTE: replaced by extra_kwargs
     # created_by = serializers.HyperlinkedIdentityField(
     #   view_name='users:user-detail'
@@ -15,4 +15,8 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ['description', 'uuid', 'completed', 'created_by', 'created_date', 'updated_date']
+        fields = ['url', 'description', 'uuid', 'completed', 'created_by', 'created_date', 'updated_date']
+        extra_kwargs = {
+            'url': {'view_name': 'tasks:task-detail', 'lookup_field': 'uuid'},
+            'created_by': {'view_name': 'users:user-detail'},
+        }
