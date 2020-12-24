@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import CreateTask from '../components/CreateTask';
+import EditTask from '../components/EditTask';
 import DeleteTask from '../components/DeleteTask';
 import CompleteTask from '../components/CompleteTask';
 
@@ -26,7 +27,7 @@ const UserPage = ({ username }) => {
     const getTaskInfo = tasks.map( task => {
             if (username) {
                 return <li key={tasks.indexOf(task)}>
-                    {task.description} 
+                    <EditTask taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
                     
                     <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/><button>&times;</button>
                     <DeleteTask taskUrl={task.url} triggerToggle={triggerToggle}/><button onClick={triggerToggle}>cancel</button>
