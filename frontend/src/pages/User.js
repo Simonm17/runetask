@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
+import CreateTask from '../components/CreateTask';
 import DeleteTask from '../components/DeleteTask';
 import CompleteTask from '../components/CompleteTask';
 
@@ -71,6 +73,7 @@ const UserPage = ({ username }) => {
 
     return (
         <div>
+            <CreateTask triggerToggle={triggerToggle}/>
             <h1>{username}</h1>
             {tasks.length > 0 ?
                 <ul> {getTaskInfo} </ul>
