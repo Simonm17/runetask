@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Task(models.Model):
-    description = models.CharField(max_length=250)
+    description = models.CharField(max_length=250, blank=True)
     uuid = models.UUIDField(
         db_index=True,
         default=uuid_lib.uuid4,

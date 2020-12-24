@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DeleteTask from '../components/DeleteTask';
+import CompleteTask from '../components/CompleteTask';
 
 const UserPage = ({ username }) => {
 
@@ -25,8 +26,8 @@ const UserPage = ({ username }) => {
                 return <li key={tasks.indexOf(task)}>
                     {task.description} 
                     
-                    <button>✓</button><button>&times;</button>
-                    <DeleteTask taskUrl={task.url} toggle={triggerToggle}/><button onClick={triggerToggle}>cancel</button>
+                    <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/><button>&times;</button>
+                    <DeleteTask taskUrl={task.url} triggerToggle={triggerToggle}/><button onClick={triggerToggle}>cancel</button>
                 </li> 
             }
             else {
