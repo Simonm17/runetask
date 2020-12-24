@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-const EditTask = ({ taskUrl, description, triggerToggle }) => {
+const EditTask = ({ taskUrl, description, triggerToggle, setMsg }) => {
 
     const [desc, setDesc] = useState(description);
 
@@ -24,6 +24,7 @@ const EditTask = ({ taskUrl, description, triggerToggle }) => {
             return axios(config)
             .then(res => {
                 console.log(JSON.stringify(res.data));
+                setMsg('saved!');
                 triggerToggle();
             })
         }

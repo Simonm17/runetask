@@ -11,6 +11,10 @@ const UserPage = ({ username }) => {
     const [taskUrls, setTaskUrls] = useState([]);
     const [tasks, setTasks] = useState([]);
 
+    const [msg, setMsg] = useState('');
+    function clearMsg(){
+        return setMsg('');
+    }
 
     // used for triggering getUserAPI() after CUD requests.
     const [toggle, setToggle] = useState(true);
@@ -27,7 +31,7 @@ const UserPage = ({ username }) => {
     const getTaskInfo = tasks.map( task => {
             if (username) {
                 return <li key={tasks.indexOf(task)}>
-                    <EditTask taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
+                    <EditTask setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
                     
                     <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/><button>&times;</button>
                     <DeleteTask taskUrl={task.url} triggerToggle={triggerToggle}/><button onClick={triggerToggle}>cancel</button>
@@ -76,6 +80,7 @@ const UserPage = ({ username }) => {
         <div>
             <CreateTask triggerToggle={triggerToggle}/>
             <h1>{username}</h1>
+            <p>{msg? <p>saved! <span onClick={clearMsg}>&times;</span></p> : ''}</p>
             {tasks.length > 0 ?
                 <ul> {getTaskInfo} </ul>
                 :
