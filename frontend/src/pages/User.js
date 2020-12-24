@@ -19,7 +19,7 @@ const UserPage = ({ username }) => {
                     {task.description} 
                     
                     <button>✓</button><button>&times;</button>
-                    <DeleteTask taskUrl={taskUrls[task]} /><button>cancel</button>
+                    <DeleteTask taskUrl={task.url} /><button>cancel</button>
                 </li> 
             }
             else {

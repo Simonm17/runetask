@@ -5,12 +5,20 @@ import axios from 'axios';
 const DeleteTask = ({ taskUrl }) => {
     const token = localStorage.getItem('token');
 
+    const config = {
+        method: 'delete',
+        url: taskUrl,
+        headers: {
+            Authorization: 'Token ' + token 
+        }
+    }
+
     const handleDelete = () => {
         if (token) {
             // FIX AXIOS POST PARAMETERS
-            return axios.post(taskUrl, token)
+            return axios(config)
             .then(res => {
-                console.log(res);
+                console.log(JSON.stringify(res.data));
             })
             .catch(err => {
                 console.log(err);
@@ -18,7 +26,6 @@ const DeleteTask = ({ taskUrl }) => {
         }
         return console.log('no token!');
     }
-
 
     return (
         <button onClick={handleDelete}>
