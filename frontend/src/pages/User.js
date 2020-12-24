@@ -7,6 +7,13 @@ const UserPage = ({ username }) => {
     const [taskUrls, setTaskUrls] = useState([]);
     const [tasks, setTasks] = useState([]);
 
+
+    // used for triggering getUserAPI() after CUD requests.
+    const [toggle, setToggle] = useState(true);
+    const triggerToggle = () => {
+        setToggle(!toggle);
+    }
+
     // note: MAKE SURE USER IS AUTHENTICATED AND EQUALS OBJECT OWNER TO DISPLAY BUTTONS
     // ✓ button is a toggle; saves Task.completed field as true or false, indicated by regular or crossed-out text.
     // x button is a toggle; it brings out the confirm & cancel buttons. Once clicked, x button disappears.
@@ -19,7 +26,7 @@ const UserPage = ({ username }) => {
                     {task.description} 
                     
                     <button>✓</button><button>&times;</button>
-                    <DeleteTask taskUrl={task.url} /><button>cancel</button>
+                    <DeleteTask taskUrl={task.url} toggle={triggerToggle}/><button onClick={triggerToggle}>cancel</button>
                 </li> 
             }
             else {
@@ -41,9 +48,12 @@ const UserPage = ({ username }) => {
             });
         };
         getUserAPI();
-    }, []);
+    }, [toggle]);
 
     useEffect(() => {
+        // Initialize with empty array so array doesn't
+        // merge on top of already added states when using setTasks.
+        setTasks([]);
         for (let i = 0; i < taskUrls.length; i++){
             axios.get(taskUrls[i])
             .then( res => {
@@ -55,6 +65,7 @@ const UserPage = ({ username }) => {
                 console.log(err);
             });
         }
+    // only triggered when change in returned urls array by GET for users list.
     }, [taskUrls]);
 
     return (

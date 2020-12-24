@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 
-const DeleteTask = ({ taskUrl }) => {
+const DeleteTask = ({ taskUrl, toggle }) => {
     const token = localStorage.getItem('token');
 
     const config = {
@@ -19,6 +19,7 @@ const DeleteTask = ({ taskUrl }) => {
             return axios(config)
             .then(res => {
                 console.log(JSON.stringify(res.data));
+                toggle();
             })
             .catch(err => {
                 console.log(err);
