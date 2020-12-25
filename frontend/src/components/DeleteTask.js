@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 
-const DeleteTask = ({ taskUrl, triggerToggle }) => {
+const DeleteTask = ({ taskUrl, triggerToggle, setMsg }) => {
     const token = localStorage.getItem('token');
 
     const config = {
@@ -15,8 +15,10 @@ const DeleteTask = ({ taskUrl, triggerToggle }) => {
 
     const handleDelete = () => {
         if (token) {
-            // FIX AXIOS POST PARAMETERS
             return axios(config)
+            .then(
+                setMsg('Item deleted!')
+            )
             .then(res => {
                 console.log(JSON.stringify(res.data));
                 triggerToggle();

@@ -19,7 +19,7 @@ const EditTask = ({ taskUrl, description, triggerToggle, setMsg }) => {
     }
 
     const keyPressHandler = (e) => {
-        if (e.key === 'Enter') {
+        if (token && e.key === 'Enter' && e.target.value.length > 0) {
             e.preventDefault();
             return axios(config)
             .then(res => {
@@ -27,14 +27,19 @@ const EditTask = ({ taskUrl, description, triggerToggle, setMsg }) => {
                 setMsg('saved!');
                 triggerToggle();
             })
+            .catch(err => {
+                console.log(err);
+            })
+        } else if (token && e.key === 'Enter' && e.target.value.length === 0) {
+            return setMsg('You must type at least one character.')
         }
         return console.log(` another key was pressed.`)
     }
 
     return (
-        <form>
+        <>
             <input type="text" value={desc} onChange={e => setDesc(e.target.value)} onKeyPress={keyPressHandler}/>
-        </form>
+        </>
     )
 }
 

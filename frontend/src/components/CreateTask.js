@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 
-const CreateTask = ({ triggerToggle }) => {
+const CreateTask = ({ triggerToggle, setMsg }) => {
 
     const [value, setValue] = useState('');
 
@@ -19,15 +19,23 @@ const CreateTask = ({ triggerToggle }) => {
         }
     }
 
-    const handleSubmit = () => {
-        axios(config)
-        .then(res => {
-            console.log(JSON.stringify(res.data))
-            triggerToggle();
-        })
-        .catch(err => {
-            console.log(err);
-        })
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (value !== '') {
+            return axios(config)
+            .then(res => {
+                console.log(JSON.stringify(res.data));
+                triggerToggle();
+                setMsg('task created!');
+                setValue('');
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+        return (
+            setMsg('You must type at least one character.')
+        )
     }
 
     return (

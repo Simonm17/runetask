@@ -12,6 +12,7 @@ const UserPage = ({ username }) => {
     const [tasks, setTasks] = useState([]);
 
     const [msg, setMsg] = useState('');
+    
     function clearMsg(){
         return setMsg('');
     }
@@ -34,7 +35,7 @@ const UserPage = ({ username }) => {
                     <EditTask setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
                     
                     <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/><button>&times;</button>
-                    <DeleteTask taskUrl={task.url} triggerToggle={triggerToggle}/><button onClick={triggerToggle}>cancel</button>
+                    <DeleteTask setMsg={setMsg} taskUrl={task.url} triggerToggle={triggerToggle}/><button onClick={triggerToggle}>cancel</button>
                 </li> 
             }
             else {
@@ -61,6 +62,7 @@ const UserPage = ({ username }) => {
     useEffect(() => {
         // Initialize with empty array so array doesn't
         // merge on top of already added states when using setTasks.
+        console.log(`UseEffect triggered by taskUrls.`);
         setTasks([]);
         for (let i = 0; i < taskUrls.length; i++){
             axios.get(taskUrls[i])
@@ -78,9 +80,9 @@ const UserPage = ({ username }) => {
 
     return (
         <div>
-            <CreateTask triggerToggle={triggerToggle}/>
+            <CreateTask setMsg={setMsg} triggerToggle={triggerToggle}/>
             <h1>{username}</h1>
-            <p>{msg? <p>saved! <span onClick={clearMsg}>&times;</span></p> : ''}</p>
+            {msg? <p>{msg} <span onClick={clearMsg}>&times;</span></p> : ''}
             {tasks.length > 0 ?
                 <ul> {getTaskInfo} </ul>
                 :
