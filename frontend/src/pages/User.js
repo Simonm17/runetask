@@ -8,6 +8,8 @@ import CompleteTask from '../components/CompleteTask';
 
 const UserPage = ({ username }) => {
 
+    const token = localStorage.getItem('token');
+
     const [taskUrls, setTaskUrls] = useState([]);
     const [tasks, setTasks] = useState([]);
 
@@ -30,7 +32,7 @@ const UserPage = ({ username }) => {
     // cancel button resets buttons and returns x button.
 
     const getTaskInfo = tasks.map( task => {
-            if (username) {
+            if (token) {
                 return <li key={tasks.indexOf(task)}>
                     <EditTask setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
                     
