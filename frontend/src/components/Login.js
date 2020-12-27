@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 
-function Login({ setToken, setUser, setMessage }){
+function Login({ setToken, setMessage }){
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -21,8 +21,9 @@ function Login({ setToken, setUser, setMessage }){
             let authToken = localStorage.setItem('token', res.data.key);
             setToken(authToken);
 
+            // use username from local storage to use outside of url param handling
             let authUser = localStorage.setItem('user', username);
-            setUser(authUser);
+            // setUser(authUser);
 
             setMessage(`Logged in as ${username}.`);
         })

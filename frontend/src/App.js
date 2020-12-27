@@ -16,43 +16,35 @@ import UserPage from './pages/User';
 function App() {
 
   const [token, setToken] = useState(null);
-  const [user, setUser] = useState('');
+
   const [message, setMessage] = useState('');
+  const clearMsg = () => {
+    setMessage('');
+  }
 
   const checkToken = () => {
     setToken(localStorage.getItem('token'));
   }
 
-  const checkUser = () => {
-    setUser(localStorage.getItem('user'));
-  }
 
   useEffect(() => {
     checkToken();
-    checkUser();
-  }, [token, user]);
+  }, [token, message]);
 
   return (
     <BrowserRouter>
       <nav>
         {token ? 
-          <Logout setToken={setToken} setUser={setUser} setMessage={setMessage}/> :
-          <Login setToken={setToken} setUser={setUser} setMessage={setMessage}/>
+          <Logout setToken={setToken} setMessage={setMessage}/> :
+          <Login setToken={setToken} setMessage={setMessage}/>
         }
       </nav>
 
       {message &&
-        <h5>{message}</h5>
+        <h5>{message} <span onClick={clearMsg}>&times;</span></h5>
       }
       <Switch>
-        {user ?
-          <Route path="/{user}">
-            <UserPage username={user} /> :
-          </Route>
-          :
-          <h5>Sign in to get user.</h5>
-        }
-        
+        <Route path="/:user" render={routerProps => <UserPage username={routerProps} />} />
       </Switch>
 
     </BrowserRouter>

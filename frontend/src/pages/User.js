@@ -6,6 +6,7 @@ import EditTask from '../components/EditTask';
 import DeleteTask from '../components/DeleteTask';
 import CompleteTask from '../components/CompleteTask';
 
+
 const UserPage = ({ username }) => {
 
     const token = localStorage.getItem('token');
@@ -50,7 +51,7 @@ const UserPage = ({ username }) => {
 
     useEffect(() => {
         const getUserAPI = () => {
-            axios.get(`http://localhost:8000/users/` + username)
+            axios.get(`http://localhost:8000/users/` + username.match.params.user)
             .then(res => {
                 setTaskUrls(res.data.tasks);
             })
@@ -82,13 +83,18 @@ const UserPage = ({ username }) => {
 
     return (
         <div>
-            <CreateTask setMsg={setMsg} triggerToggle={triggerToggle}/>
-            <h1>{username}</h1>
+            {token? 
+                <CreateTask setMsg={setMsg} triggerToggle={triggerToggle}/>
+                :
+                ''
+            }
+            <h1>{username.match.params.user}'s Profile</h1>
+            <h1></h1>
             {msg? <p>{msg} <span onClick={clearMsg}>&times;</span></p> : ''}
             {tasks.length > 0 ?
                 <ul> {getTaskInfo} </ul>
                 :
-                <p>You have no tasks! Click to add.</p>
+                <p>{token ? 'You have no tasks! Click to add.' : 'No tasks added yet.'}</p>
             }
         </div>
     )
