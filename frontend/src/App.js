@@ -11,24 +11,35 @@ import './App.css';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import UserPage from './pages/User';
+import Register from './components/Register';
 
 
 function App() {
 
   const [token, setToken] = useState(null);
 
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState([]);
   const clearMsg = () => {
     setMessage('');
+  }
+  const displayMsg = () => {
+    if (typeof message === 'object') {
+      for (let key in message) {
+      <li>{key}</li>
+      }
+    } else {
+      <li>{message}</li>
+    }
+    
   }
 
   const checkToken = () => {
     setToken(localStorage.getItem('token'));
   }
 
-
   useEffect(() => {
     checkToken();
+    console.log(typeof message);
   }, [token, message]);
 
   return (
@@ -36,12 +47,18 @@ function App() {
       <nav>
         {token ? 
           <Logout setToken={setToken} setMessage={setMessage}/> :
+          <>
           <Login setToken={setToken} setMessage={setMessage}/>
+          <Register setMessage={setMessage}/>
+          </>
         }
       </nav>
 
-      {message &&
-        <h5>{message} <span onClick={clearMsg}>&times;</span></h5>
+      {message.length > 0 ?
+        <ul>{displayMsg}<span onClick={clearMsg}>&times;</span></ul>
+        
+        :
+        ''
       }
       <Switch>
         <Route path="/:user" render={routerProps => <UserPage username={routerProps} />} />
