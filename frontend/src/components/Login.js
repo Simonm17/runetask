@@ -23,9 +23,8 @@ function Login({ setToken, setMessage }){
 
             // use username from local storage to use outside of url param handling
             let authUser = localStorage.setItem('user', username);
-            // setUser(authUser);
 
-            setMessage(`Logged in as ${username}.`);
+            setMessage([`Logged in as ${username}.`]);
         })
         .catch(err => {
             console.log(err);

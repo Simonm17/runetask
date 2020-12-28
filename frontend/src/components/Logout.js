@@ -7,8 +7,7 @@ const Logout = ({ setToken, setMessage }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setToken(null);
-        // setUser('');
-        setMessage(`You have logged out.`);
+        setMessage([`You have logged out.`]);
     }
 
     return (

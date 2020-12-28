@@ -22,7 +22,7 @@ function App() {
   const clearMsg = () => {
     setMessage([]);
   }
-  const displayMsg = message.map(msg => <li>{msg}</li>)
+  const displayMsg = message.map(msg => <li key={msg.indexOf(message)}>{msg}</li>)
 
   const checkToken = () => {
     setToken(localStorage.getItem('token'));
@@ -36,18 +36,17 @@ function App() {
     <BrowserRouter>
       <nav>
         {token ? 
-          <Logout setToken={setToken} setMessage={setMessage}/> :
+          <Logout setToken={setToken} setMessage={setMessage}/>
+          :
           <>
-          <Login setToken={setToken} setMessage={setMessage}/>
-          <Register setMessage={setMessage}/>
+            <Login setToken={setToken} setMessage={setMessage}/>
+            <Register setMessage={setMessage}/>
           </>
         }
       </nav>
 
       {message.length > 0 ?
-        <>
-          <ul>{displayMsg}<span onClick={clearMsg}>&times;</span></ul>
-        </>
+        <ul>{displayMsg}<span onClick={clearMsg}>&times;</span></ul>
         :
         ''
       }

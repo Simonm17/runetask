@@ -13,14 +13,14 @@ const Register = ({ setMessage }) => {
         setMessage([]);
         e.preventDefault();
 
-        if (password1.length > 8 && password1 === password2) {
+        if (username && email && password1.length > 8 && password1 === password2) {
             let data = {
                 'username': username,
                 'email': email,
                 'password1': password1,
                 'password2': password2
             }
-            axios.post(`http://localhost:8000/dj-rest-auth/registration/`, data)
+            return axios.post(`http://localhost:8000/dj-rest-auth/registration/`, data)
             .then(res => {
                 console.log(JSON.stringify(res.data));
                 setMessage(prevMsg => [...prevMsg, `You have created your account ${username}`]);
@@ -36,15 +36,17 @@ const Register = ({ setMessage }) => {
                     console.log(key, err.response.data[key]);
                     setMessage(prevMsg => [...prevMsg, err.response.data[key][0]]);
                 }
-                
             });
+        } else if (username === '' || null) {
+            return setMessage(prevMsg => [...prevMsg, "You must type in a username."]);
+        } else if (email === '' || null) {
+            return setMessage(prevMsg => [...prevMsg, "Your email must not be blank."]);
         } else if (password1.length < 8) {
             return setMessage(prevMsg => [...prevMsg, "Your password must be at least 8 characters long."]);
         } else if (password1 !== password2) {
             return setMessage(prevMsg => [...prevMsg, "Your passwords do not match."]);
         }
-
-
+        return setMessage(['An error has occured. Please try again later.']);
     }
 
     return (
