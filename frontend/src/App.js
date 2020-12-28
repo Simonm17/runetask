@@ -20,18 +20,9 @@ function App() {
 
   const [message, setMessage] = useState([]);
   const clearMsg = () => {
-    setMessage('');
+    setMessage([]);
   }
-  const displayMsg = () => {
-    if (typeof message === 'object') {
-      for (let key in message) {
-      <li>{key}</li>
-      }
-    } else {
-      <li>{message}</li>
-    }
-    
-  }
+  const displayMsg = message.map(msg => <li>{msg}</li>)
 
   const checkToken = () => {
     setToken(localStorage.getItem('token'));
@@ -39,7 +30,6 @@ function App() {
 
   useEffect(() => {
     checkToken();
-    console.log(typeof message);
   }, [token, message]);
 
   return (
@@ -55,8 +45,9 @@ function App() {
       </nav>
 
       {message.length > 0 ?
-        <ul>{displayMsg}<span onClick={clearMsg}>&times;</span></ul>
-        
+        <>
+          <ul>{displayMsg}<span onClick={clearMsg}>&times;</span></ul>
+        </>
         :
         ''
       }

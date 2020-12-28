@@ -10,7 +10,7 @@ const Register = ({ setMessage }) => {
     const [password2, setPassword2] = useState('');
 
     const handleRegister = e => {
-        setMessage('');
+        setMessage([]);
         e.preventDefault();
 
         if (password1.length > 8 && password1 === password2) {
