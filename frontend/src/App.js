@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import Login from './components/Login';
+import TwitchLogin from './components/TwitchLogin';
 import Logout from './components/Logout';
 import UserPage from './pages/User';
 import Register from './components/Register';
@@ -40,6 +41,7 @@ function App() {
           :
           <>
             <Login setToken={setToken} setMessage={setMessage}/>
+            <TwitchLogin />
             <Register setMessage={setMessage}/>
           </>
         }
