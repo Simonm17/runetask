@@ -43,7 +43,7 @@ function App() {
           :
           <>
             <Login setToken={setToken} setMessage={setMessage}/>
-            <Register setMessage={setMessage}/>
+            {/* <Register setMessage={setMessage}/> */}
           </>
         }
       </nav>

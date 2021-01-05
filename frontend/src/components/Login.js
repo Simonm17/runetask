@@ -34,32 +34,31 @@ function Login({ setToken, setMessage }){
 
     return (
         <>
-        <form onSubmit={handleLoginSubmit}>
+            {/* <form onSubmit={handleLoginSubmit}>
 
-            <input
-                type="text"
-                placeholder="username"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-            />
+                <input
+                    type="text"
+                    placeholder="username"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                />
 
-            <input
-                type="password"
-                placeholder="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-            />
+                <input
+                    type="password"
+                    placeholder="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                />
 
-            <input
-                type="submit"
-                value="Login"
-            />
+                <input
+                    type="submit"
+                    value="Login"
+                />
 
-        </form>
+            </form>
 
-        <p>or</p>
-        <a href="http://localhost:8000/auth/login">Login with Twitch</a>
-
+            <p>or</p> */}
+            <a href="http://localhost:8000/auth/login">Login with Twitch</a>
         </>
     )
 }
