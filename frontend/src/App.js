@@ -21,11 +21,12 @@ function App() {
 
   const [token, setToken] = useState(null);
   const [authUser, setAuthUser] = useState('');
-
   const [message, setMessage] = useState([]);
   const clearMsg = () => {
     setMessage([]);
   }
+
+  // returns array of messages returned to message state by API calls
   const displayMsg = message.map(msg => <li key={msg.indexOf(message)}>{msg}</li>)
 
   const checkToken = () => {
@@ -40,7 +41,7 @@ function App() {
       headers: {
           Authorization: 'Token ' + token 
       }
-  }
+    }
     if (token) {
       axios(config)
       .then(res => setAuthUser(res.data.username))
@@ -57,13 +58,18 @@ function App() {
   }, [token, message]);
 
 
-
   return (
     <BrowserRouter>
       <Route path="/twitch/:code" render={locationProps => <TwitchLogin params={locationProps} setMessage={setMessage} setToken={setToken} />}/>
       <nav>
         {token ? 
-          <Logout setToken={setToken} setMessage={setMessage} setAuthUser={setAuthUser} />
+          <>
+            <Link to={{
+              pathname: `/users/${authUser}`,
+              state: { fromDashboard: true }
+            }}>My tasks </Link>
+            <Logout setToken={setToken} setMessage={setMessage} setAuthUser={setAuthUser} />
+          </>
           :
           <Login setToken={setToken} setMessage={setMessage}/>
         }
