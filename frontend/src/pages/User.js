@@ -21,7 +21,7 @@ const UserPage = ({ username, authUser }) => {
     }
 
     useEffect(() => {
-        if (token !== null) {
+        if (token == null) {
             setMsg('');
         }
     }, [authUser]);

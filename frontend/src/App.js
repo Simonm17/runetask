@@ -33,15 +33,16 @@ function App() {
     setToken(localStorage.getItem('token'));
   }
 
+  const config = {
+    method: 'get',
+    url: 'http://localhost:8000/dj-rest-auth/user/',
+    headers: {
+        Authorization: 'Token ' + token 
+    }
+  }
+
   useEffect(() => {
     console.log(`triggering dj-rest-auth/user/ with token ${token}`);
-    const config = {
-      method: 'get',
-      url: 'http://localhost:8000/dj-rest-auth/user/',
-      headers: {
-          Authorization: 'Token ' + token 
-      }
-    }
     if (token) {
       axios(config)
       .then(res => setAuthUser(res.data.username))
