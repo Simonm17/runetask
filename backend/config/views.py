@@ -18,7 +18,7 @@ from django.shortcuts import redirect
     3. TwitchConnect uses returned code, authenticates user in backend, and returns back token/key.
         Key then is passed as params to twitch_callback to be used by frontend authentication.
     4. twitch_callback returns code to frontend using params.
-
+    NOTE: recomment later. not the correct flow.
 """
 
 class TwitchConnect(SocialLoginView):
@@ -33,6 +33,7 @@ class TwitchConnect(SocialLoginView):
 def twitch_callback(request):
     params = urllib.parse.urlencode(request.GET)
     print(params)
-    # return redirect(f'https://localhost:3000/')
+    return redirect(f'http://localhost:3000/twitch/{params}')
     # using jsonresponse as a placeholder until frontend params are finished
-    return JsonResponse(params, safe=False)
+    # return JsonResponse(params, safe=False)
+

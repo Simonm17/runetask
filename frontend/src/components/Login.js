@@ -33,6 +33,7 @@ function Login({ setToken, setMessage }){
     }
 
     return (
+        <>
         <form onSubmit={handleLoginSubmit}>
 
             <input
@@ -55,6 +56,11 @@ function Login({ setToken, setMessage }){
             />
 
         </form>
+
+        <p>or</p>
+        <a href="http://localhost:8000/auth/login">Login with Twitch</a>
+
+        </>
     )
 }
 

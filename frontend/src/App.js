@@ -5,7 +5,8 @@ import {
   Route,
   Link,
   useRouteMatch,
-  useParams
+  useParams,
+  useLocation
 } from "react-router-dom";
 import './App.css';
 import Login from './components/Login';
@@ -35,13 +36,13 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Route path="/twitch/:code" render={locationProps => <TwitchLogin params={locationProps} setMessage={setMessage} setToken={setToken} />}/>
       <nav>
         {token ? 
           <Logout setToken={setToken} setMessage={setMessage}/>
           :
           <>
             <Login setToken={setToken} setMessage={setMessage}/>
-            <TwitchLogin />
             <Register setMessage={setMessage}/>
           </>
         }
@@ -53,7 +54,7 @@ function App() {
         ''
       }
       <Switch>
-        <Route path="/:user" render={routerProps => <UserPage username={routerProps} />} />
+        <Route path="/users/:user" render={routerProps => <UserPage username={routerProps} />} />
       </Switch>
 
     </BrowserRouter>
