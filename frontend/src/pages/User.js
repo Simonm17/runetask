@@ -20,6 +20,11 @@ const UserPage = ({ username, authUser }) => {
         return setMsg('');
     }
 
+    useEffect(() => {
+        if (token !== null) {
+            setMsg('');
+        }
+    }, [authUser]);
 
     // used for triggering getUserAPI() after CUD requests.
     const [toggle, setToggle] = useState(true);

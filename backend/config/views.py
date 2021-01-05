@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from django.urls import reverse
 from django.shortcuts import redirect
 
+
 """
     Twitch OAuth2 workflow using allauth ->
     1. React calls OAuth2 login view via 
