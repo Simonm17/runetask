@@ -5,15 +5,19 @@ import { useHistory } from "react-router-dom";
 
 const TwitchLogin = ({ params, setToken, setMessage }) => {
 
+    // used for redirecting back to homepage after successful login
     const history = useHistory();
 
     // slices and returns code for backend code submission
     const accessCode = params.location.pathname.slice(13, 43);
 
+    // used for POST request parameter in submitCode
     const codeParams = {
         'code': accessCode
     }
 
+    // make POST request to backend with access code,
+    // get back key for auth, store in localStorage.
     const submitCode = () => {
         axios.post('http://localhost:8000/twitch/connect/', codeParams)
         .then(res => {
@@ -27,12 +31,8 @@ const TwitchLogin = ({ params, setToken, setMessage }) => {
     }
 
     useEffect(() => {
-        console.log('params:');
-        console.log(params.location.pathname);
-        console.log(`code: ${accessCode}`);
         submitCode();
     }, []);
-
 
     return (
         <>
