@@ -57,17 +57,18 @@ function App() {
     checkToken();
   }, [token, message]);
 
-
   return (
     <BrowserRouter>
       <Route path="/twitch/:code" render={locationProps => <TwitchLogin params={locationProps} setMessage={setMessage} setToken={setToken} />}/>
       <nav>
+        <Link to="/">Home</Link>
         {token ? 
           <>
             <Link to={{
               pathname: `/users/${authUser}`,
               state: { fromDashboard: true }
-            }}>My tasks </Link>
+            }}>My tasks</Link>
+
             <Logout setToken={setToken} setMessage={setMessage} setAuthUser={setAuthUser} />
           </>
           :
