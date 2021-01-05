@@ -13,13 +13,13 @@ const UserPage = ({ username, authUser }) => {
 
     const [taskUrls, setTaskUrls] = useState([]);
     const [tasks, setTasks] = useState([]);
-    const [user, setUser] = useState('');
 
     const [msg, setMsg] = useState('');
     
     function clearMsg(){
         return setMsg('');
     }
+
 
     // used for triggering getUserAPI() after CUD requests.
     const [toggle, setToggle] = useState(true);

@@ -63,7 +63,7 @@ function App() {
       <Route path="/twitch/:code" render={locationProps => <TwitchLogin params={locationProps} setMessage={setMessage} setToken={setToken} />}/>
       <nav>
         {token ? 
-          <Logout setToken={setToken} setMessage={setMessage}/>
+          <Logout setToken={setToken} setMessage={setMessage} setAuthUser={setAuthUser} />
           :
           <Login setToken={setToken} setMessage={setMessage}/>
         }
