@@ -14,11 +14,13 @@ import TwitchLogin from './components/TwitchLogin';
 import Logout from './components/Logout';
 import UserPage from './pages/User';
 import Register from './components/Register';
+import axios from 'axios';
 
 
 function App() {
 
   const [token, setToken] = useState(null);
+  const [authUser, setAuthUser] = useState('');
 
   const [message, setMessage] = useState([]);
   const clearMsg = () => {
@@ -31,8 +33,30 @@ function App() {
   }
 
   useEffect(() => {
+    console.log(`triggering dj-rest-auth/user/ with token ${token}`);
+    const config = {
+      method: 'get',
+      url: 'http://localhost:8000/dj-rest-auth/user/',
+      headers: {
+          Authorization: 'Token ' + token 
+      }
+  }
+    if (token) {
+      axios(config)
+      .then(res => setAuthUser(res.data.username))
+      .catch(err => {
+        console.log(err);
+        console.log(`ERR token: ${token}`);
+      });
+    }
+  }, [token]);
+
+  useEffect(() => {
+    console.log(`checkToken() triggered.`)
     checkToken();
   }, [token, message]);
+
+
 
   return (
     <BrowserRouter>
@@ -41,10 +65,7 @@ function App() {
         {token ? 
           <Logout setToken={setToken} setMessage={setMessage}/>
           :
-          <>
-            <Login setToken={setToken} setMessage={setMessage}/>
-            {/* <Register setMessage={setMessage}/> */}
-          </>
+          <Login setToken={setToken} setMessage={setMessage}/>
         }
       </nav>
 
@@ -54,7 +75,7 @@ function App() {
         ''
       }
       <Switch>
-        <Route path="/users/:user" render={routerProps => <UserPage username={routerProps} />} />
+        <Route path="/users/:user" render={routerProps => <UserPage username={routerProps} authUser={authUser}/>} />
       </Switch>
 
     </BrowserRouter>

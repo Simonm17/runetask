@@ -36,4 +36,3 @@ def twitch_callback(request):
     return redirect(f'http://localhost:3000/twitch/{params}')
     # using jsonresponse as a placeholder until frontend params are finished
     # return JsonResponse(params, safe=False)
-

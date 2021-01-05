@@ -7,12 +7,13 @@ import DeleteTask from '../components/DeleteTask';
 import CompleteTask from '../components/CompleteTask';
 
 
-const UserPage = ({ username }) => {
+const UserPage = ({ username, authUser }) => {
 
     const token = localStorage.getItem('token');
 
     const [taskUrls, setTaskUrls] = useState([]);
     const [tasks, setTasks] = useState([]);
+    const [user, setUser] = useState('');
 
     const [msg, setMsg] = useState('');
     
@@ -33,7 +34,7 @@ const UserPage = ({ username }) => {
     // cancel button resets buttons and returns x button.
 
     const getTaskInfo = tasks.map( task => {
-            if (token) {
+            if (token && authUser === username.match.params.user) {
                 return <li key={tasks.indexOf(task)}>
                     <EditTask setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
                     
@@ -83,13 +84,12 @@ const UserPage = ({ username }) => {
 
     return (
         <div>
-            {token? 
+            {token && authUser === username.match.params.user ? 
                 <CreateTask setMsg={setMsg} triggerToggle={triggerToggle}/>
                 :
                 ''
             }
             <h1>{username.match.params.user}'s Profile</h1>
-            <h1></h1>
             {msg? <p>{msg} <span onClick={clearMsg}>&times;</span></p> : ''}
             {tasks.length > 0 ?
                 <ul> {getTaskInfo} </ul>
