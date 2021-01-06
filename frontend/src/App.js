@@ -4,17 +4,14 @@ import {
   Switch,
   Route,
   Link,
-  useRouteMatch,
-  useParams,
-  useLocation
 } from "react-router-dom";
 import './App.css';
 import Login from './components/Login';
 import TwitchLogin from './components/TwitchLogin';
 import Logout from './components/Logout';
 import UserPage from './pages/User';
-import Register from './components/Register';
 import axios from 'axios';
+import styled from 'styled-components';
 
 
 function App() {
@@ -61,27 +58,29 @@ function App() {
   return (
     <BrowserRouter>
       <Route path="/twitch/:code" render={locationProps => <TwitchLogin params={locationProps} setMessage={setMessage} setToken={setToken} />}/>
-      <nav>
+      <Nav>
         <Link to="/">Home</Link>
         {token ? 
-          <>
+          <div>
             <Link to={{
               pathname: `/users/${authUser}`,
               state: { fromDashboard: true }
             }}>My tasks</Link>
 
             <Logout setToken={setToken} setMessage={setMessage} setAuthUser={setAuthUser} />
-          </>
+          </div>
           :
           <Login setToken={setToken} setMessage={setMessage}/>
         }
-      </nav>
+      </Nav>
 
-      {message.length > 0 ?
-        <ul>{displayMsg}<span onClick={clearMsg}>&times;</span></ul>
-        :
-        ''
-      }
+      <div>
+        {message.length > 0 ?
+          <ul>{displayMsg}<span onClick={clearMsg}>&times;</span></ul>
+          :
+          <li>example message for styling!</li>
+        }
+      </div>
       <Switch>
         <Route path="/users/:user" render={routerProps => <UserPage username={routerProps} authUser={authUser}/>} />
       </Switch>
@@ -89,5 +88,32 @@ function App() {
     </BrowserRouter>
   );
 }
+
+const Nav = styled.nav`
+  border: transparent;
+  border-radius: 25px;
+  background-color: #1b1b1b;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5vw;
+  align-items: center;
+  margin: 3%;
+  height: 10vh;
+  a {
+    text-decoration: none;
+    color: #e3cac8;
+  }
+  a:hover {
+    /* animate underline? */
+    text-decoration: underline;
+    text-decoration-color: #e3cac8;
+    cursor: pointer;
+  }
+  div {
+    a {
+      margin: 5px;
+    }
+  }
+`
 
 export default App;

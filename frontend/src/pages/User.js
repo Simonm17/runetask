@@ -42,7 +42,7 @@ const UserPage = ({ username, authUser }) => {
             if (token && authUser === username.match.params.user) {
                 return <li key={tasks.indexOf(task)}>
                     <EditTask setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
-                    
+
                     <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/><button>&times;</button>
                     <DeleteTask setMsg={setMsg} taskUrl={task.url} triggerToggle={triggerToggle}/><button onClick={triggerToggle}>cancel</button>
                 </li> 

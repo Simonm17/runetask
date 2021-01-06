@@ -13,7 +13,7 @@ const Logout = ({ setToken, setMessage, setAuthUser }) => {
 
     return (
         <>
-            <button onClick={handleLogoutClick}>Logout</button>
+            <a onClick={handleLogoutClick}>Logout</a>
         </>
     )
 }
