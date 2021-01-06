@@ -12,14 +12,13 @@ from django.shortcuts import redirect
 
 """
     Twitch OAuth2 workflow using allauth ->
-    1. React calls OAuth2 login view via 
-        allauth.socialaccount.providers.twitch.views.oauth2_login
-    2. Twitch OAuth2 login page returns. User enters login information 
-        and is then redirected to TwitchConnect class view.
-    3. TwitchConnect uses returned code, authenticates user in backend, and returns back token/key.
-        Key then is passed as params to twitch_callback to be used by frontend authentication.
-    4. twitch_callback returns code to frontend using params.
-    NOTE: recomment later. not the correct flow.
+    1. User clicks on btn in react that routes to backend/auth/login
+    2. auth/login redirects to twitch for user login
+    3. twitch redirects to twitch_callback with access code
+    4. twitch_callback redirects to react with access code
+    5. react takes and sends access code to TwitchConnect
+    6. TwitchConnect takes access code and returns auth token
+    7. react now can use token to authenticate users and make API calls.
 """
 
 class TwitchConnect(SocialLoginView):
