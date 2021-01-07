@@ -57,7 +57,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Route path="/twitch/:code" render={locationProps => <TwitchLogin params={locationProps} setMessage={setMessage} setToken={setToken} />}/>
       <Nav>
         <Link to="/">Home</Link>
         {token ? 
@@ -77,15 +76,41 @@ function App() {
       <Message>
         {message.length > 0 ?
           <>
-            <ul>{displayMsg}</ul>
-            <span onClick={clearMsg}>&times;</span>
+            <div className="msg-div">
+              <ul>{displayMsg}</ul>
+              <span onClick={clearMsg}>&times;</span>
+            </div>
+            <div className="clear-div"></div>
           </>
           :
           ''
         }
       </Message>
       <Switch>
-        <Route path="/users/:user" render={routerProps => <UserPage username={routerProps} authUser={authUser}/>} />
+
+        <Route
+          path="/twitch/:code"
+          render={
+            locationProps => 
+            <TwitchLogin 
+              params={locationProps}
+              setMessage={setMessage}
+              setToken={setToken} 
+            />
+          }
+        />
+
+        <Route
+          path="/users/:user"
+          render={
+            routerProps =>
+            <UserPage
+              username={routerProps}
+              authUser={authUser}
+            />
+          } 
+        />
+
       </Switch>
 
     </BrowserRouter>
@@ -121,21 +146,27 @@ const Nav = styled.nav`
 `
 
 const Message = styled.div`
-  color: #e3cac8;
-  background-color: #1b1b1b;
-  border: transparent;
-  border-radius: 35px;
-  margin: 0 2%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  float: left;
-  span {
-    height: auto;
-    padding: 0 30px;
+  margin: 5vh 0;
+  .msg-div {
+    color: #e3cac8;
+    background-color: #1b1b1b;
+    border: transparent;
+    border-radius: 35px;
+    margin: 0 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    float: left;
+    span {
+      height: auto;
+      padding: 0 30px;
+    }
+    span:hover {
+      cursor: pointer;
+    }
   }
-  span:hover {
-    cursor: pointer;
+  .clear-div {
+    clear: both;
   }
 `
 
