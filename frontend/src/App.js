@@ -61,7 +61,7 @@ function App() {
       <Nav>
         <Link to="/">Home</Link>
         {token ? 
-          <div>
+          <div className="auth-div">
             <Link to={{
               pathname: `/users/${authUser}`,
               state: { fromDashboard: true }
@@ -74,13 +74,16 @@ function App() {
         }
       </Nav>
 
-      <div>
+      <Message>
         {message.length > 0 ?
-          <ul>{displayMsg}<span onClick={clearMsg}>&times;</span></ul>
+          <>
+            <ul>{displayMsg}</ul>
+            <span onClick={clearMsg}>&times;</span>
+          </>
           :
-          <li>example message for styling!</li>
+          ''
         }
-      </div>
+      </Message>
       <Switch>
         <Route path="/users/:user" render={routerProps => <UserPage username={routerProps} authUser={authUser}/>} />
       </Switch>
@@ -91,14 +94,15 @@ function App() {
 
 const Nav = styled.nav`
   border: transparent;
-  border-radius: 25px;
+  border-radius: 35px;
   background-color: #1b1b1b;
   display: flex;
   justify-content: space-between;
   padding: 0 5vw;
   align-items: center;
-  margin: 3%;
+  margin: 1% 2%;
   height: 10vh;
+  font-size: 30px;
   a {
     text-decoration: none;
     color: #e3cac8;
@@ -109,10 +113,29 @@ const Nav = styled.nav`
     text-decoration-color: #e3cac8;
     cursor: pointer;
   }
-  div {
+  .auth-div {
     a {
-      margin: 5px;
+      margin: 0 15px;
     }
+  }
+`
+
+const Message = styled.div`
+  color: #e3cac8;
+  background-color: #1b1b1b;
+  border: transparent;
+  border-radius: 35px;
+  margin: 0 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  float: left;
+  span {
+    height: auto;
+    padding: 0 30px;
+  }
+  span:hover {
+    cursor: pointer;
   }
 `
 
