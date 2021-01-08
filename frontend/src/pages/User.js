@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import styled from 'styled-components';
 import CreateTask from '../components/CreateTask';
 import EditTask from '../components/EditTask';
 import DeleteTask from '../components/DeleteTask';
@@ -88,21 +88,42 @@ const UserPage = ({ username, authUser }) => {
     }, [taskUrls]);
 
     return (
-        <div>
-            {token && authUser === username.match.params.user ? 
+        <User>
+            
+            {username.match.params.user &&
+                <h1>{username.match.params.user}'s tasks</h1>
+            }
+            {msg && <p className="msg-text">{msg} <span onClick={clearMsg}>&times;</span></p>}
+            {token && authUser === username.match.params.user && 
                 <CreateTask setMsg={setMsg} triggerToggle={triggerToggle}/>
-                :
-                ''
             }
-            <h1>{username.match.params.user}'s Profile</h1>
-            {msg? <p>{msg} <span onClick={clearMsg}>&times;</span></p> : ''}
+
             {tasks.length > 0 ?
-                <ul> {getTaskInfo} </ul>
+                <ul className="task-list">{getTaskInfo}</ul>
                 :
-                <p>{token ? 'You have no tasks! Click to add.' : 'No tasks added yet.'}</p>
+                <p>{token && authUser === username.match.params.user ?
+                    'You have no tasks!' : `${username.match.params.user} currently has no task.`
+                    }
+                </p>
             }
-        </div>
+        </User>
     )
 }
+
+const User = styled.div`
+    h1 {
+        text-align: center;
+    }
+    .msg-text {
+
+    }
+    .task-list {
+        border: 1px solid yellow;
+        display: inline-block;
+        max-width: 80%;
+        margin-left: 10vw;
+        margin-right: auto;
+    }
+`
 
 export default UserPage;

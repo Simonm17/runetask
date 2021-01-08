@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import styled from 'styled-components';
 
 const CreateTask = ({ triggerToggle, setMsg }) => {
 
@@ -39,7 +39,7 @@ const CreateTask = ({ triggerToggle, setMsg }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <input 
                 type="text"
                 placeholder="Add new task" 
@@ -47,8 +47,15 @@ const CreateTask = ({ triggerToggle, setMsg }) => {
                 value={value}
             />
             <input type="submit" value="Create" />
-        </form>
+        </Form>
     );
 }
+
+const Form = styled.form`
+    border: 1px solid white;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+`
 
 export default CreateTask;
