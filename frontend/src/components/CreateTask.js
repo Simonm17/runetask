@@ -54,6 +54,7 @@ const CreateTask = ({ triggerToggle, setMsg }) => {
     );
 }
 
+// form styling inspired by https://codepen.io/swapnet/pen/QWwPVwE
 const Form = styled.form`
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
@@ -82,17 +83,15 @@ const Form = styled.form`
     }
     button {
         color: #131211;
-        border-radius: 15px;
+        border-radius: 9px;
         font-weight: bold;
         box-shadow: -5px -5px 20px #6441a5,  5px 5px 20px #523687;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
         font-weight: 600;
-        
         &:hover {
             box-shadow: -2px -2px 5px #6441a5, 2px 2px 5px #523687;
         }
-        
         &:active {
             box-shadow: inset 1px 1px 2px #523687, inset -1px -1px 2px #6441a5;
         }
