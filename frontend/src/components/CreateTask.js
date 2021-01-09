@@ -46,16 +46,54 @@ const CreateTask = ({ triggerToggle, setMsg }) => {
                 onChange={e => setValue(e.target.value)} 
                 value={value}
             />
-            <input type="submit" value="Create" />
+            <button type="submit">Create</button>
         </Form>
     );
 }
 
 const Form = styled.form`
-    border: 1px solid white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    letter-spacing: -0.2px;
     margin: auto;
     display: flex;
     justify-content: center;
+    button, input {
+        border: 0;
+        outline: 0;
+        font-size: 16px;
+        margin: 10px;
+        padding: 16px;
+        background-color: #6441a5;
+    }
+    input {
+        border-radius: 35px;
+        box-shadow:  inset 2px 2px 5px #523687, inset -5px -5px 10px #6441a5;
+        box-sizing: border-box;
+        transition: all 0.2s ease-in-out;
+        appearance: none;
+        -webkit-appearance: none;
+        &:focus {
+            box-shadow:  inset 1px 1px 2px #523687, inset -1px -1px 2px #6441a5;
+        }
+    }
+    button {
+        color: #131211;
+        border-radius: 15px;
+        font-weight: bold;
+        box-shadow: -5px -5px 20px #6441a5,  5px 5px 20px #523687;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        font-weight: 600;
+        
+        &:hover {
+            box-shadow: -2px -2px 5px #6441a5, 2px 2px 5px #523687;
+        }
+        
+        &:active {
+            box-shadow: inset 1px 1px 2px #523687, inset -1px -1px 2px #6441a5;
+        }
+    }
 `
 
 export default CreateTask;
