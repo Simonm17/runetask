@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSave } from '@fortawesome/free-solid-svg-icons'
+
 
 const CreateTask = ({ triggerToggle, setMsg }) => {
 
@@ -42,11 +45,11 @@ const CreateTask = ({ triggerToggle, setMsg }) => {
         <Form onSubmit={handleSubmit}>
             <input 
                 type="text"
-                placeholder="Add new task" 
+                placeholder="Add new task"
                 onChange={e => setValue(e.target.value)} 
                 value={value}
             />
-            <button type="submit">Create</button>
+            <button type="submit"><FontAwesomeIcon icon={faSave} /> Create</button>
         </Form>
     );
 }
