@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Logout = ({ setToken, setMessage, setAuthUser }) => {
     
@@ -13,7 +14,7 @@ const Logout = ({ setToken, setMessage, setAuthUser }) => {
 
     return (
         <>
-            <a onClick={handleLogoutClick}>Logout</a>
+            <a onClick={handleLogoutClick}><FontAwesomeIcon icon={faSignOutAlt} /></a>
         </>
     )
 }

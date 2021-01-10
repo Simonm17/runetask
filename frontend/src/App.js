@@ -12,6 +12,8 @@ import Logout from './components/Logout';
 import UserPage from './pages/User';
 import axios from 'axios';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTasks } from '@fortawesome/free-solid-svg-icons';
 
 
 function App() {
@@ -64,7 +66,7 @@ function App() {
             <Link to={{
               pathname: `/users/${authUser}`,
               state: { fromDashboard: true }
-            }}>My tasks</Link>
+            }}><FontAwesomeIcon icon={faTasks} /></Link>
 
             <Logout setToken={setToken} setMessage={setMessage} setAuthUser={setAuthUser} />
           </div>

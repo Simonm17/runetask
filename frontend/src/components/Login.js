@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitch } from '@fortawesome/free-brands-svg-icons';
 
 
 function Login({ setToken, setMessage }){
@@ -58,7 +60,9 @@ function Login({ setToken, setMessage }){
             </form>
 
             <p>or</p> */}
-            <a href="http://localhost:8000/auth/login">Login with Twitch</a>
+            <a href="http://localhost:8000/auth/login">
+                <FontAwesomeIcon icon={faTwitch} /> Log In
+            </a>
         </>
     )
 }
