@@ -93,7 +93,11 @@ const UserPage = ({ username, authUser }) => {
             {username.match.params.user &&
                 <h1>{username.match.params.user}'s tasks</h1>
             }
-            {msg && <p className="msg-text">{msg} <span onClick={clearMsg}>&times;</span></p>}
+            {msg && 
+                <Messages>
+                    <p className="msg-text">{msg} <span onClick={clearMsg}>&times;</span></p>
+                </Messages>
+            }
             {token && authUser === username.match.params.user && 
                 <CreateTask setMsg={setMsg} triggerToggle={triggerToggle}/>
             }
@@ -114,9 +118,6 @@ const User = styled.div`
     h1 {
         text-align: center;
     }
-    .msg-text {
-
-    }
     .task-list {
         border: 1px solid yellow;
         display: inline-block;
@@ -125,5 +126,17 @@ const User = styled.div`
         margin-right: auto;
     }
 `
+
+const Messages = styled.div`
+    .msg-text {
+        display: inline-block;
+        margin-left: 15vw;
+        span {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+`;
 
 export default UserPage;

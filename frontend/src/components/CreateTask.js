@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 const CreateTask = ({ triggerToggle, setMsg }) => {
@@ -49,7 +49,7 @@ const CreateTask = ({ triggerToggle, setMsg }) => {
                 onChange={e => setValue(e.target.value)} 
                 value={value}
             />
-            <button type="submit"><FontAwesomeIcon icon={faSave} /> Create</button>
+            <button type="submit"><FontAwesomeIcon icon={faPlus} /> Create</button>
         </Form>
     );
 }

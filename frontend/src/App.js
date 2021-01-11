@@ -119,6 +119,7 @@ function App() {
   );
 }
 
+
 const Nav = styled.nav`
   border: transparent;
   border-radius: 35px;

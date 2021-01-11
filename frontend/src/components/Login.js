@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitch } from '@fortawesome/free-brands-svg-icons';
-
+import styled from 'styled-components';
 
 function Login({ setToken, setMessage }){
 
@@ -35,36 +35,20 @@ function Login({ setToken, setMessage }){
     }
 
     return (
-        <>
-            {/* <form onSubmit={handleLoginSubmit}>
-
-                <input
-                    type="text"
-                    placeholder="username"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                />
-
-                <input
-                    type="password"
-                    placeholder="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
-
-                <input
-                    type="submit"
-                    value="Login"
-                />
-
-            </form>
-
-            <p>or</p> */}
-            <a href="http://localhost:8000/auth/login">
-                <FontAwesomeIcon icon={faTwitch} /> Log In
-            </a>
-        </>
+        <Button href="http://localhost:8000/auth/login">
+            <FontAwesomeIcon icon={faTwitch} /> Log In
+        </Button>
     )
 }
+
+// Current a tag styling attributes are controlled by Nav styled component.
+// e.g. Button {text-decoration:none} won't work
+// because Nav controls text-decoration in its styling.
+// to modify Button, add classes in Nav to separate Button a-tag from rest of Nav.
+const Button = styled.a`
+    svg {
+        color:  #6441a5;
+    }
+`;
 
 export default Login;
