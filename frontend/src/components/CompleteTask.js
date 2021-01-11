@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
 
 const CompleteTask = ({taskUrl, taskStatus, triggerToggle}) => {
@@ -34,13 +35,17 @@ const CompleteTask = ({taskUrl, taskStatus, triggerToggle}) => {
 
     return (
         <>
-            {taskStatus ? 
-                <button style={{textDecoration: 'line-through'}} onClick={handleComplete}>✓</button>
+            {taskStatus?
+                <CompleteButton onClick={handleComplete}>!</CompleteButton>
                 :
-                <button onClick={handleComplete}>✓</button>
+                <CompleteButton onClick={handleComplete}>✓</CompleteButton>
             }
         </>
     )
 }
+
+const CompleteButton = styled.button`
+
+`;
 
 export default CompleteTask;

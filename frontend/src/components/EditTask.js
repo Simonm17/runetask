@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const EditTask = ({ taskUrl, description, triggerToggle, setMsg }) => {
+const EditTask = ({ taskUrl, description, triggerToggle, setMsg, completed }) => {
 
     const [desc, setDesc] = useState(description);
 
@@ -38,7 +38,7 @@ const EditTask = ({ taskUrl, description, triggerToggle, setMsg }) => {
 
     return (
         <>
-            <Input type="text" value={desc} onChange={e => setDesc(e.target.value)} onKeyPress={keyPressHandler}/>
+            <Input completed={completed} type="text" value={desc} onChange={e => setDesc(e.target.value)} onKeyPress={keyPressHandler}/>
         </>
     )
 }
@@ -53,6 +53,9 @@ const Input = styled.input`
     margin: 0 5px;
     &:focus {
         box-shadow: inset 2px 2px 5px #523687, inset -5px -5px 10px #6441a5;
+    }
+    ${({ completed }) => 
+        completed && `text-decoration: line-through;`
     }
 `;
 

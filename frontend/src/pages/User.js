@@ -41,10 +41,12 @@ const UserPage = ({ username, authUser }) => {
     const getTaskInfo = tasks.map( task => {
             if (token && authUser === username.match.params.user) {
                 return <li key={tasks.indexOf(task)}>
-                    <EditTask setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
+                    <EditTask completed={task.completed} setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
 
-                    <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/><button>&times;</button>
-                    <DeleteTask setMsg={setMsg} taskUrl={task.url} triggerToggle={triggerToggle}/><button onClick={triggerToggle}>cancel</button>
+                    <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/>
+                    <button>&times;</button>
+                    <DeleteTask setMsg={setMsg} taskUrl={task.url} triggerToggle={triggerToggle}/>
+                    <button onClick={triggerToggle}>cancel</button>
                 </li> 
             }
             else {
@@ -141,6 +143,24 @@ const TaskList = styled.ul`
 const User = styled.div`
     h1 {
         text-align: center;
+    }
+    button {
+        border: 0;
+        border-radius: 10px;
+        font-weight: bold;
+        outline: 0;
+        font-size: 16px;
+        margin: 6px 3px;
+        padding: 10px 15px;
+        background-color: #6441a5;
+        box-shadow:-5px -5px 20px #6441a5,  5px 5px 20px #523687;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            box-shadow: -2px -2px 5px #6441a5, 2px 2px 5px #523687;
+        }
+        &:active {
+            box-shadow: inset 1px 1px 2px #523687, inset -1px -1px 2px #6441a5;
+        }
     }
 `
 
