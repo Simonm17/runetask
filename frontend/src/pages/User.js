@@ -32,6 +32,8 @@ const UserPage = ({ username, authUser }) => {
         setToggle(!toggle);
     }
 
+
+
     // note: MAKE SURE USER IS AUTHENTICATED AND EQUALS OBJECT OWNER TO DISPLAY BUTTONS
     // ✓ button is a toggle; saves Task.completed field as true or false, indicated by regular or crossed-out text.
     // x button is a toggle; it brings out the confirm & cancel buttons. Once clicked, x button disappears.
@@ -50,9 +52,19 @@ const UserPage = ({ username, authUser }) => {
                 </li> 
             }
             else {
-                return <li key={tasks.indexOf(task)}>
-                    {task.description}
-                </li>
+                return (
+                    <>
+                        {task.completed ?
+                            <li style={{textDecoration: 'line-through'}} key={tasks.indexOf(task)}>
+                            {task.description}
+                            </li>
+                            :
+                            <li key={tasks.indexOf(task)}>
+                                {task.description}
+                            </li>
+                        }
+                    </>
+                )
             }
         }
     );

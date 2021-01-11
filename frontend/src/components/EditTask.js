@@ -38,6 +38,7 @@ const EditTask = ({ taskUrl, description, triggerToggle, setMsg, completed }) =>
 
     return (
         <>
+            
             <Input completed={completed} type="text" value={desc} onChange={e => setDesc(e.target.value)} onKeyPress={keyPressHandler}/>
         </>
     )
