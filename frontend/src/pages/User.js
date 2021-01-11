@@ -5,6 +5,9 @@ import CreateTask from '../components/CreateTask';
 import EditTask from '../components/EditTask';
 import DeleteTask from '../components/DeleteTask';
 import CompleteTask from '../components/CompleteTask';
+import { motion } from 'framer-motion';
+import { AnimateSharedLayout } from "framer-motion"
+
 
 
 const UserPage = ({ username, authUser }) => {
@@ -32,6 +35,19 @@ const UserPage = ({ username, authUser }) => {
         setToggle(!toggle);
     }
 
+    // for framer-motion animation for delete buttons
+    const [deleteBtn, setDeleteBtn] = useState(false);
+
+    function triggerDeleteBtn() {
+        setDeleteBtn(!deleteBtn);
+    }
+
+    // ANIMATION STUFF HERE
+    const variants = {
+        hidden: {scale: 0},
+        visible: {scale: 1},
+
+    }
 
 
     // note: MAKE SURE USER IS AUTHENTICATED AND EQUALS OBJECT OWNER TO DISPLAY BUTTONS
@@ -46,9 +62,26 @@ const UserPage = ({ username, authUser }) => {
                     <EditTask completed={task.completed} setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
 
                     <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/>
-                    <button>&times;</button>
-                    <DeleteTask setMsg={setMsg} taskUrl={task.url} triggerToggle={triggerToggle}/>
-                    <button onClick={triggerToggle}>cancel</button>
+
+                    <AnimateSharedLayout>
+                        <motion.button
+                            variants={variants}
+                            initial="visible"
+                            animate={{ scale: deleteBtn ? '0' : '1'}}
+                            onClick={() => setDeleteBtn(true)}
+                        >&times;</motion.button>
+                        {deleteBtn &&
+                            <motion.div 
+                                variants={variants}
+                                initial={{ scale: 0, x: -45}}
+                                animate={{ scale: deleteBtn? '1' : '0'}}
+                                transition={{ ease: "easeOut", duration: 5 }}
+                            >
+                                <DeleteTask setMsg={setMsg} taskUrl={task.url} triggerToggle={triggerToggle}/>
+                                <motion.button onClick={triggerDeleteBtn}>cancel</motion.button>
+                            </motion.div>
+                        }
+                    </AnimateSharedLayout>
                 </li> 
             }
             else {
@@ -143,12 +176,10 @@ const TaskList = styled.ul`
         background-color: #6441a5;
         box-shadow: -5px -5px 20px #6441a5,  5px 5px 20px #523687;
         transition: all 0.2s ease-in-out;
-        /* &:hover {
-            box-shadow: -2px -2px 5px #6441a5, 2px 2px 5px #523687;
-        }
-        &:active {
-            box-shadow: inset 1px 1px 2px #523687, inset -1px -1px 2px #6441a5;
-        } */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
     }
 `;
 

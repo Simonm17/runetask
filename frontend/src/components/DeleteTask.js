@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import { motion } from 'framer-motion';
 
 const DeleteTask = ({ taskUrl, triggerToggle, setMsg }) => {
     const token = localStorage.getItem('token');
@@ -31,9 +31,9 @@ const DeleteTask = ({ taskUrl, triggerToggle, setMsg }) => {
     }
 
     return (
-        <button onClick={handleDelete}>
+        <motion.button onClick={handleDelete}>
             confirm
-        </button>
+        </motion.button>
     )
 }
 
