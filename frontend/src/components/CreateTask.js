@@ -78,7 +78,7 @@ const Form = styled.form`
         appearance: none;
         -webkit-appearance: none;
         &:focus {
-            box-shadow:  inset 1px 1px 2px #523687, inset -1px -1px 2px #6441a5;
+            box-shadow: inset 1px 1px 2px #523687, inset -1px -1px 2px #6441a5;
         }
     }
     button {

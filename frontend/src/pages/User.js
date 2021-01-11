@@ -103,7 +103,7 @@ const UserPage = ({ username, authUser }) => {
             }
 
             {tasks.length > 0 ?
-                <ul className="task-list">{getTaskInfo}</ul>
+                <TaskList>{getTaskInfo}</TaskList>
                 :
                 <p>{token && authUser === username.match.params.user ?
                     'You have no tasks!' : `${username.match.params.user} currently has no task.`
@@ -114,16 +114,33 @@ const UserPage = ({ username, authUser }) => {
     )
 }
 
+const TaskList = styled.ul`
+    display: inline-block;
+    max-width: 80%;
+    margin-left: 10vw;
+    margin-right: auto;
+    list-style: none;
+    li {
+        border: 0;
+        outline: 0;
+        font-size: 16px;
+        margin: 10px;
+        padding: 16px;
+        background-color: #6441a5;
+        box-shadow: -5px -5px 20px #6441a5,  5px 5px 20px #523687;
+        transition: all 0.2s ease-in-out;
+        /* &:hover {
+            box-shadow: -2px -2px 5px #6441a5, 2px 2px 5px #523687;
+        }
+        &:active {
+            box-shadow: inset 1px 1px 2px #523687, inset -1px -1px 2px #6441a5;
+        } */
+    }
+`;
+
 const User = styled.div`
     h1 {
         text-align: center;
-    }
-    .task-list {
-        border: 1px solid yellow;
-        display: inline-block;
-        max-width: 80%;
-        margin-left: 10vw;
-        margin-right: auto;
     }
 `
 

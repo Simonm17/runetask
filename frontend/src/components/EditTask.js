@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import styled from 'styled-components';
 
 const EditTask = ({ taskUrl, description, triggerToggle, setMsg }) => {
 
@@ -38,9 +38,22 @@ const EditTask = ({ taskUrl, description, triggerToggle, setMsg }) => {
 
     return (
         <>
-            <input type="text" value={desc} onChange={e => setDesc(e.target.value)} onKeyPress={keyPressHandler}/>
+            <Input type="text" value={desc} onChange={e => setDesc(e.target.value)} onKeyPress={keyPressHandler}/>
         </>
     )
 }
+
+const Input = styled.input`
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    height: 25px;
+    background-color: #6441a5;
+    padding: 4px;
+    margin: 0 5px;
+    &:focus {
+        box-shadow: inset 2px 2px 5px #523687, inset -5px -5px 10px #6441a5;
+    }
+`;
 
 export default EditTask;
