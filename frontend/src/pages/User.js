@@ -38,51 +38,46 @@ const UserPage = ({ username, authUser }) => {
     // for framer-motion animation for delete buttons
     const [selectedBtn, setSelectedBtn] = useState('');
 
+    // for resetting state after canceling or deleting task/edits
     function triggerSelectedBtn() {
         setSelectedBtn('');
     }
 
-    // ANIMATION STUFF HERE
+    // FRAMER ANIMATION STUFF HERE
     const variants = {
         hidden: {scale: 0},
         visible: {scale: 1},
 
     }
 
-
-    // note: MAKE SURE USER IS AUTHENTICATED AND EQUALS OBJECT OWNER TO DISPLAY BUTTONS
-    // ✓ button is a toggle; saves Task.completed field as true or false, indicated by regular or crossed-out text.
-    // x button is a toggle; it brings out the confirm & cancel buttons. Once clicked, x button disappears.
-    // confirm button triggers Task.delete() via post request.
-    // cancel button resets buttons and returns x button.
-
     const getTaskInfo = tasks.map( task => {
             if (token && authUser === username.match.params.user) {
                 return <li key={tasks.indexOf(task)}>
                     <EditTask completed={task.completed} setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
-                    <div>
-                    <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/>
+                    <motion.div className="button-container">
+                        <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/>
 
-                    <AnimateSharedLayout>
-                        <motion.button
-                            variants={variants}
-                            initial="visible"
-                            animate={{ scale: selectedBtn === tasks.indexOf(task) ? '0' : '1'}}
-                            onClick={() => setSelectedBtn(tasks.indexOf(task))}
-                        >&times;</motion.button>
-                        {selectedBtn === tasks.indexOf(task) &&
-                            <motion.div 
+                        <AnimateSharedLayout>
+                            <motion.button
                                 variants={variants}
-                                initial={{ scale: 0, x: -45}}
-                                animate={{ scale: selectedBtn === tasks.indexOf(task)? '1' : '0'}}
-                                transition={{ ease: "easeOut", duration: 5 }}
-                            >
-                                <DeleteTask setMsg={setMsg} taskUrl={task.url} triggerToggle={triggerToggle} setSelectedBtn={setSelectedBtn}/>
-                                <motion.button onClick={triggerSelectedBtn}>cancel</motion.button>
-                            </motion.div>
-                        }
-                    </AnimateSharedLayout>
-                    </div>
+                                initial="visible"
+                                animate={{ scale: selectedBtn === tasks.indexOf(task) ? '0' : '1'}}
+                                onClick={() => setSelectedBtn(tasks.indexOf(task))}
+                            >&times;</motion.button>
+                            {selectedBtn === tasks.indexOf(task) &&
+                                <motion.div
+                                    className="confirm-cancel-div"
+                                    variants={variants}
+                                    initial={{ scale: 0, x: -45}}
+                                    animate={{ scale: selectedBtn === tasks.indexOf(task)? '1' : '0'}}
+                                    transition={{ ease: "easeOut", duration: 5 }}
+                                >
+                                    <DeleteTask setMsg={setMsg} taskUrl={task.url} triggerToggle={triggerToggle} setSelectedBtn={setSelectedBtn}/>
+                                    <motion.button onClick={triggerSelectedBtn}>cancel</motion.button>
+                                </motion.div>
+                            }
+                        </AnimateSharedLayout>
+                    </motion.div>
                 </li> 
             }
             else {
@@ -163,10 +158,12 @@ const UserPage = ({ username, authUser }) => {
 }
 
 const TaskList = styled.ul`
-    display: inline-block;
+    display: flex;
+    flex-flow: column nowrap;
+    overflow-x: hidden;
+    min-width: 35%;
     max-width: 80%;
-    margin-left: 10vw;
-    margin-right: auto;
+    margin: auto;
     list-style: none;
     li {
         border: 0;
@@ -178,9 +175,16 @@ const TaskList = styled.ul`
         box-shadow: -5px -5px 20px #6441a5,  5px 5px 20px #523687;
         transition: all 0.2s ease-in-out;
         display: flex;
+        flex-flow: row wrap;
         justify-content: space-between;
         align-items: center;
-        
+        .button-container {
+            display: flex;
+        }
+        .confirm-cancel-div {
+            display: flex;
+            flex-flow: row nowrap;
+        }
     }
 `;
 
