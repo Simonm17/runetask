@@ -161,15 +161,15 @@ const TaskList = styled.ul`
     display: flex;
     flex-flow: column nowrap;
     overflow-x: hidden;
-    min-width: 35%;
     max-width: 80%;
     margin: auto;
     list-style: none;
+    padding-inline-start: 0;
     li {
         border: 0;
         outline: 0;
         font-size: 16px;
-        margin: 10px;
+        margin: 10px auto;
         padding: 16px;
         background-color: #6441a5;
         box-shadow: -5px -5px 20px #6441a5,  5px 5px 20px #523687;
