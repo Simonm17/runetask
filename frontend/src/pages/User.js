@@ -36,10 +36,10 @@ const UserPage = ({ username, authUser }) => {
     }
 
     // for framer-motion animation for delete buttons
-    const [deleteBtn, setDeleteBtn] = useState(false);
+    const [selectedBtn, setSelectedBtn] = useState('');
 
-    function triggerDeleteBtn() {
-        setDeleteBtn(!deleteBtn);
+    function triggerSelectedBtn() {
+        setSelectedBtn('');
     }
 
     // ANIMATION STUFF HERE
@@ -60,28 +60,29 @@ const UserPage = ({ username, authUser }) => {
             if (token && authUser === username.match.params.user) {
                 return <li key={tasks.indexOf(task)}>
                     <EditTask completed={task.completed} setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
-
+                    <div>
                     <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/>
 
                     <AnimateSharedLayout>
                         <motion.button
                             variants={variants}
                             initial="visible"
-                            animate={{ scale: deleteBtn ? '0' : '1'}}
-                            onClick={() => setDeleteBtn(true)}
+                            animate={{ scale: selectedBtn === tasks.indexOf(task) ? '0' : '1'}}
+                            onClick={() => setSelectedBtn(tasks.indexOf(task))}
                         >&times;</motion.button>
-                        {deleteBtn &&
+                        {selectedBtn === tasks.indexOf(task) &&
                             <motion.div 
                                 variants={variants}
                                 initial={{ scale: 0, x: -45}}
-                                animate={{ scale: deleteBtn? '1' : '0'}}
+                                animate={{ scale: selectedBtn === tasks.indexOf(task)? '1' : '0'}}
                                 transition={{ ease: "easeOut", duration: 5 }}
                             >
-                                <DeleteTask setMsg={setMsg} taskUrl={task.url} triggerToggle={triggerToggle}/>
-                                <motion.button onClick={triggerDeleteBtn}>cancel</motion.button>
+                                <DeleteTask setMsg={setMsg} taskUrl={task.url} triggerToggle={triggerToggle} setSelectedBtn={setSelectedBtn}/>
+                                <motion.button onClick={triggerSelectedBtn}>cancel</motion.button>
                             </motion.div>
                         }
                     </AnimateSharedLayout>
+                    </div>
                 </li> 
             }
             else {

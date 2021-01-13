@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 
-const DeleteTask = ({ taskUrl, triggerToggle, setMsg }) => {
+const DeleteTask = ({ taskUrl, triggerToggle, setMsg, setSelectedBtn }) => {
     const token = localStorage.getItem('token');
 
     const config = {
@@ -22,6 +22,7 @@ const DeleteTask = ({ taskUrl, triggerToggle, setMsg }) => {
             .then(res => {
                 console.log(JSON.stringify(res.data));
                 triggerToggle();
+                setSelectedBtn('');
             })
             .catch(err => {
                 console.log(err);
