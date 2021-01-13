@@ -61,12 +61,13 @@ const Form = styled.form`
     letter-spacing: -0.2px;
     margin: auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     button, input {
         border: 0;
         outline: 0;
         font-size: 16px;
-        margin: 10px;
+        margin: 12px;
         padding: 16px;
         background-color: #6441a5;
     }
