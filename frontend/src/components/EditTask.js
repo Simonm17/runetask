@@ -38,11 +38,25 @@ const EditTask = ({ taskUrl, description, triggerToggle, setMsg, completed }) =>
 
     return (
         <>
-            
+            { completed ?
+            <CompletedTask style={{ textDecoration: 'line-through' }}>{desc}</CompletedTask>
+            :
             <Input completed={completed} type="text" value={desc} onChange={e => setDesc(e.target.value)} onKeyPress={keyPressHandler}/>
+            }
         </>
     )
 }
+
+const CompletedTask = styled.p`
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    height: 25px;
+    background-color: #6441a5;
+    padding: 4px;
+    margin: 0 5px;
+    min-width: 169px;
+`;
 
 const Input = styled.input`
     outline: 0;
