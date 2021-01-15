@@ -56,7 +56,6 @@ const UserPage = ({ username, authUser }) => {
                     <EditTask completed={task.completed} setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
                     <motion.div className="button-container">
                         <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/>
-
                         <AnimateSharedLayout>
                             <motion.button
                                 variants={variants}
@@ -132,7 +131,6 @@ const UserPage = ({ username, authUser }) => {
 
     return (
         <User>
-            
             {username.match.params.user &&
                 <h1>{username.match.params.user}'s tasks</h1>
             }
@@ -144,7 +142,6 @@ const UserPage = ({ username, authUser }) => {
             {token && authUser === username.match.params.user && 
                 <CreateTask setMsg={setMsg} triggerToggle={triggerToggle}/>
             }
-
             {tasks.length > 0 ?
                 <TaskList>{getTaskInfo}</TaskList>
                 :
@@ -210,7 +207,7 @@ const User = styled.div`
             box-shadow: inset 1px 1px 2px #523687, inset -1px -1px 2px #6441a5;
         }
     }
-`
+`;
 
 const Messages = styled.div`
     .msg-text {
