@@ -7,7 +7,7 @@ import DeleteTask from '../components/DeleteTask';
 import CompleteTask from '../components/CompleteTask';
 import { motion } from 'framer-motion';
 import { AnimateSharedLayout } from "framer-motion"
-
+import { baseBackendUrl } from '../urls'; 
 
 
 const UserPage = ({ username, authUser }) => {
@@ -99,7 +99,7 @@ const UserPage = ({ username, authUser }) => {
 
     useEffect(() => {
         const getUserAPI = async () => {
-            await axios.get(`http://localhost:8000/users/` + username.match.params.user)
+            await axios.get(`${baseBackendUrl}/users/` + username.match.params.user)
             .then(res => {
                 setTaskUrls(res.data.tasks);
             })
