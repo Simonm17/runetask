@@ -3,6 +3,8 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitch } from '@fortawesome/free-brands-svg-icons';
 import styled from 'styled-components';
+import { baseBackendUrl } from '../urls';
+
 
 function Login({ setToken, setMessage }){
 
@@ -17,7 +19,7 @@ function Login({ setToken, setMessage }){
             'password': password
         };
 
-        axios.post('http://localhost:8000/dj-rest-auth/login/', loginData)
+        axios.post(`${baseBackendUrl}/dj-rest-auth/login/`, loginData)
         .then(res => {
 
             let authToken = localStorage.setItem('token', res.data.key);
@@ -34,8 +36,10 @@ function Login({ setToken, setMessage }){
         });
     }
 
+    const loginLink = `${baseBackendUrl}/auth/login`;
+
     return (
-        <Button href="http://localhost:8000/auth/login">
+        <Button href={loginLink}>
             <FontAwesomeIcon icon={faTwitch} /> Log In
         </Button>
     )

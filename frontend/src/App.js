@@ -5,7 +5,6 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import './App.css';
 import Login from './components/Login';
 import TwitchLogin from './components/TwitchLogin';
 import Logout from './components/Logout';
@@ -14,7 +13,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTasks } from '@fortawesome/free-solid-svg-icons';
-
+import { baseBackendUrl } from './urls';
 
 function App() {
 
@@ -34,7 +33,7 @@ function App() {
 
   const config = {
     method: 'get',
-    url: 'http://localhost:8000/dj-rest-auth/user/',
+    url: `${baseBackendUrl}/dj-rest-auth/user/`,
     headers: {
         Authorization: 'Token ' + token 
     }

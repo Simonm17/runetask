@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { baseBackendUrl } from '../urls';
 
 
 const Register = ({ setMessage }) => {
@@ -20,7 +21,7 @@ const Register = ({ setMessage }) => {
                 'password1': password1,
                 'password2': password2
             }
-            return axios.post(`http://localhost:8000/dj-rest-auth/registration/`, data)
+            return axios.post(`${baseBackendUrl}/dj-rest-auth/registration/`, data)
             .then(res => {
                 console.log(JSON.stringify(res.data));
                 setMessage(prevMsg => [...prevMsg, `You have created your account ${username}`]);

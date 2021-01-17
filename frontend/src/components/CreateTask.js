@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { baseBackendUrl } from '../urls';
 
 const CreateTask = ({ triggerToggle, setMsg }) => {
 
@@ -12,7 +12,7 @@ const CreateTask = ({ triggerToggle, setMsg }) => {
     const token = localStorage.getItem('token');
     const config = {
         method: 'post',
-        url: 'http://localhost:8000/tasks/',
+        url: `${baseBackendUrl}/tasks/`,
         headers: {
             Authorization: 'Token ' + token
         },
