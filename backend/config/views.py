@@ -12,8 +12,8 @@ from django.shortcuts import redirect
 
 """
     Twitch OAuth2 workflow using allauth ->
-    1. User clicks on btn in react that routes to backend/auth/login
-    2. auth/login redirects to twitch for user login
+    1. User clicks button in react that routes to allauth oauth2_login view 
+    2. oauth2_login redirects to twitch for user login
     3. twitch redirects to twitch_callback with access code
     4. twitch_callback redirects to react with access code
     5. react takes and sends access code to TwitchConnect
@@ -31,8 +31,9 @@ class TwitchConnect(SocialLoginView):
 
 
 def twitch_callback(request):
+    url = 'http://localhost:3000'
     params = urllib.parse.urlencode(request.GET)
     print(params)
-    return redirect(f'http://localhost:3000/twitch/{params}')
+    return redirect(f'{url}/twitch/{params}')
     # using jsonresponse as a placeholder until frontend params are finished
     # return JsonResponse(params, safe=False)
