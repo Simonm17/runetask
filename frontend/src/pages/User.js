@@ -98,8 +98,8 @@ const UserPage = ({ username, authUser }) => {
     );
 
     useEffect(() => {
-        const getUserAPI = () => {
-            axios.get(`http://localhost:8000/users/` + username.match.params.user)
+        const getUserAPI = async () => {
+            await axios.get(`http://localhost:8000/users/` + username.match.params.user)
             .then(res => {
                 setTaskUrls(res.data.tasks);
             })
@@ -145,7 +145,7 @@ const UserPage = ({ username, authUser }) => {
             {tasks.length > 0 ?
                 <TaskList>{getTaskInfo}</TaskList>
                 :
-                <p>{token && authUser === username.match.params.user ?
+                <p className="no-task">{token && authUser === username.match.params.user ?
                     'You have no tasks!' : `${username.match.params.user} currently has no task.`
                     }
                 </p>
@@ -186,7 +186,7 @@ const TaskList = styled.ul`
 `;
 
 const User = styled.div`
-    h1 {
+    h1, .no-task {
         text-align: center;
     }
     button {
