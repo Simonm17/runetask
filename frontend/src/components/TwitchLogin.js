@@ -19,8 +19,9 @@ const TwitchLogin = ({ params, setToken, setMessage }) => {
 
     // make POST request to backend with access code,
     // get back key for auth, store in localStorage.
-    const submitCode = () => {
-        axios.post(`${baseBackendUrl}/twitch/connect/`, codeParams)
+    const submitCode = async () => {
+        setMessage(['Logging in with twitch...']);
+        await axios.post(`${baseBackendUrl}/twitch/connect/`, codeParams)
         .then(res => {
             console.log('putting token into locaStorage..');
             let token = localStorage.setItem('token', res.data.key);
