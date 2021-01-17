@@ -29,7 +29,10 @@ const TwitchLogin = ({ params, setToken, setMessage }) => {
             setMessage(['Logged in successfully with Twitch!']);
             history.push('/');
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            setMessage(['An error occured while connecting to the server.']);
+        });
     }
 
     useEffect(() => {

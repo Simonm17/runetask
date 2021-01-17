@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 
-const CompleteTask = ({taskUrl, taskStatus, triggerToggle}) => {
+const CompleteTask = ({taskUrl, taskStatus, triggerToggle, setMsg}) => {
 
     const token = localStorage.getItem('token');
 
@@ -30,6 +30,7 @@ const CompleteTask = ({taskUrl, taskStatus, triggerToggle}) => {
             })
             .catch(err => {
                 console.log(err);
+                setMsg('An error occured. Please try again.');
             });
     }
 

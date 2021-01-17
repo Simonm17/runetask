@@ -55,7 +55,7 @@ const UserPage = ({ username, authUser }) => {
                 return <li key={tasks.indexOf(task)}>
                     <EditTask completed={task.completed} setMsg={setMsg} taskUrl={task.url} description={task.description} triggerToggle={triggerToggle}/> 
                     <motion.div className="button-container">
-                        <CompleteTask taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/>
+                        <CompleteTask setMsg={setMsg} taskUrl={task.url} taskStatus={task.completed} triggerToggle={triggerToggle}/>
                         <AnimateSharedLayout>
                             <motion.button
                                 variants={variants}

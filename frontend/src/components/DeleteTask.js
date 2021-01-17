@@ -26,6 +26,7 @@ const DeleteTask = ({ taskUrl, triggerToggle, setMsg, setSelectedBtn }) => {
             })
             .catch(err => {
                 console.log(err);
+                setMsg('An error occured. Please try again.');
             });
         }
         return console.log('no token!');

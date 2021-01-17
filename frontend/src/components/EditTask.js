@@ -29,6 +29,7 @@ const EditTask = ({ taskUrl, description, triggerToggle, setMsg, completed }) =>
             })
             .catch(err => {
                 console.log(err);
+                setMsg('An error occured. Please try again.');
             })
         } else if (token && e.key === 'Enter' && e.target.value.length === 0) {
             return setMsg('You must type at least one character.')

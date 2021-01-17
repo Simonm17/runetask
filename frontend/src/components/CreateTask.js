@@ -29,11 +29,12 @@ const CreateTask = ({ triggerToggle, setMsg }) => {
             .then(res => {
                 console.log(JSON.stringify(res.data));
                 triggerToggle();
-                setMsg('task created!');
+                setMsg('Task created!');
                 setValue('');
             })
             .catch(err => {
                 console.log(err);
+                setMsg('An error occured. Please try again.');
             })
         }
         return (
