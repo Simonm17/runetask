@@ -26,4 +26,7 @@ STATICFILES_DIRS = (
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# heroku settings
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
 django_heroku.settings(locals())
