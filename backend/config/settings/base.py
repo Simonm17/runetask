@@ -6,6 +6,21 @@ IMPORTANT: manage.py is running in local.py for development. Need to adjust when
 import os
 from pathlib import Path
 
+import sentry_sdk
+
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="https://1d850256131746469d85fe64db2fe3e1@o458567.ingest.sentry.io/5597887",
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
