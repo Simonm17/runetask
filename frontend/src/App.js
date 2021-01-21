@@ -46,13 +46,11 @@ function App() {
       .then(res => setAuthUser(res.data.username))
       .catch(err => {
         console.log(err);
-        console.log(`ERR token: ${token}`);
       });
     }
   }, [token]);
 
   useEffect(() => {
-    console.log(`checkToken() triggered.`)
     checkToken();
   }, [token, message]);
 

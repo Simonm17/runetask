@@ -23,7 +23,7 @@ const EditTask = ({ taskUrl, description, triggerToggle, setMsg, completed }) =>
             e.preventDefault();
             return axios(config)
             .then(res => {
-                console.log(JSON.stringify(res.data));
+                // console.log(JSON.stringify(res.data));
                 setMsg('saved!');
                 triggerToggle();
             })

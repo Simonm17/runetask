@@ -113,7 +113,6 @@ const UserPage = ({ username, authUser }) => {
     useEffect(() => {
         // Initialize with empty array so array doesn't
         // merge on top of already added states when using setTasks.
-        console.log(`UseEffect triggered by taskUrls.`);
         setTasks([]);
         // defining async function and calling in useEffect to get tasks back in order
         // or else tasks are returned unordered.
@@ -121,8 +120,6 @@ const UserPage = ({ username, authUser }) => {
             for (let i = 0; i < taskUrls.length; i++){
                 await axios.get(taskUrls[i])
                 .then( res => {
-                    console.log('PRINTING:');
-                    console.log(res.data);
                     setTasks(prevTask => [...prevTask, res.data]);
                 })
                 .catch(err => {

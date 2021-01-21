@@ -25,7 +25,6 @@ const CompleteTask = ({taskUrl, taskStatus, triggerToggle, setMsg}) => {
     const handleComplete = () => {
         return axios(config)
             .then(res => {
-                console.log(JSON.stringify(res.data));
                 triggerToggle();
             })
             .catch(err => {

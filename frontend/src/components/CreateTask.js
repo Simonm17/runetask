@@ -27,7 +27,7 @@ const CreateTask = ({ triggerToggle, setMsg }) => {
         if (value !== '') {
             return axios(config)
             .then(res => {
-                console.log(JSON.stringify(res.data));
+                // console.log(JSON.stringify(res.data));
                 triggerToggle();
                 setMsg('Task created!');
                 setValue('');

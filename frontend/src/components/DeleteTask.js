@@ -20,7 +20,7 @@ const DeleteTask = ({ taskUrl, triggerToggle, setMsg, setSelectedBtn }) => {
                 setMsg('Item deleted!')
             )
             .then(res => {
-                console.log(JSON.stringify(res.data));
+                // console.log(JSON.stringify(res.data));
                 triggerToggle();
                 setSelectedBtn('');
             })
