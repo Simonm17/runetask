@@ -12,6 +12,7 @@ ALLOWED_HOSTS = [
 
 CORS_ALLOWED_ORIGINS = [
     # add frontend website here
+    'https://compassionate-tesla-028027.netlify.app'
 ]
 
 DATABASES = {
