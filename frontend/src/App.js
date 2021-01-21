@@ -40,7 +40,7 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(`triggering dj-rest-auth/user/ with token ${token}`);
+    // console.log(`triggering dj-rest-auth/user/ with token ${token}`);
     if (token) {
       axios(config)
       .then(res => setAuthUser(res.data.username))
