@@ -1,4 +1,4 @@
-export const baseBackendUrl = 'http://localhost:8000'; 
+export const baseBackendUrl = 'https://runetask-backend.herokuapp.com'; 
 
 // Files using baseBackendUrl:
 // - App.js
